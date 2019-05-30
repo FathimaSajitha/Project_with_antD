@@ -104,11 +104,7 @@ class App extends React.Component {
       });
     }, 1000);
   };
-  handleChangeState = e => {
-    this.setState({
-      value: e.target.value,
-    });
-  };
+
   handleChange = (pagination, filters, sorter) => {
     console.log('Various parameters', pagination, filters, sorter);
     this.setState({
@@ -332,9 +328,7 @@ class App extends React.Component {
               </Form>
             </p>
           </Modal>
-          {/* <Button type="primary" onClick={() => this.setModal1Visible(true)}>
-          Display a modal dialog at 20px to Top
-        </Button> */}
+        
           <Modal
             title="More Information"
             style={{ top: 20 }}
@@ -342,6 +336,7 @@ class App extends React.Component {
             onOk={() => this.setModal1Visible(false)}
             onCancel={() => this.setModal1Visible(false)}
           >
+            <Form>
             <Row>
               <Col>
                 <Form.Item label="Comments">
@@ -365,10 +360,10 @@ class App extends React.Component {
                 </Form.Item>
               </Col>
             </Row>
-            <Row gutter={10}>
+            <Row>
               <Col span={12}>
                 <Form.Item label="Status">
-                  <Select defaultValue="Status" style={{ width: '100%' }} onChange={this.handleChangeState}>
+                  <Select defaultValue="status" style={{ width: '100%' }} onChange={this.handleChangeState}>
                     <Option value="new">New</Option>
                     <Option value="open">Open</Option>
                     <Option value="fixed">Fixed</Option>
@@ -380,6 +375,7 @@ class App extends React.Component {
                 </Form.Item>
               </Col>
             </Row>
+            </Form>
           </Modal>
 
         </div>
@@ -387,5 +383,6 @@ class App extends React.Component {
     );
   }
 }
+
 ReactDOM.render(<App />, document.getElementById('container'));
 export default Table;         
