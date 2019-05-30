@@ -1,22 +1,16 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Button, Modal, Form, Input, Upload, Icon, message,TreeSelect,Select,Row, Col } from 'antd';
-
+import {Button, Modal,Form,Input,Upload,Icon,message,TreeSelect,Select,Row,Col} from 'antd';
 const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
   class extends React.Component {
     state = {
       value: undefined,
+      disabled: true,
     };
-
-    onChange = value => {
+   onChange = value => {
       console.log(value);
       this.setState({ value });
     };
-
-    state = {
-      disabled: true,
-    };
-
     toggle = () => {
       this.setState({
         disabled: !this.state.disabled,
@@ -46,9 +40,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
           }
         },
       };
-
-
-      return (
+  return (
         <Modal
           visible={visible}
           title="ADD DEFECT"
@@ -56,8 +48,8 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
           style={{ top: 20 }}
           width="700px"
           onCancel={onCancel}
-          onOk={onCreate}
-        >
+          onOk={onCreate}>
+          
           <Form layout="vertical">
             <Row gutter="10">
               <Col span={2}>
@@ -83,20 +75,17 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                   </Select>
                 </Form.Item>
               </Col>
-
               <Col span={12}>
                 <Form.Item label="Sub Module">
                   {getFieldDecorator('module')}
                   <TreeSelect
                     showSearch
-                    // style={{ width: 300 }}
                     value={this.state.value}
                     dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
                     placeholder="Please select"
                     allowClear
                     treeDefaultExpandAll
-                    onChange={this.onChange}
-                  >
+                    onChange={this.onChange}>
                     <TreeNode value="sub module" title="sub module" key="0-1">
                       <TreeNode value="sub module 1" title="sub module 1" key="random" />
                       <TreeNode value="sub module 2" title="sub module 2" key="random1" />
@@ -108,7 +97,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
 
             <Row gutter={10}>
               <Col span={8}>
-                <Form.Item label="Type: ">
+                <Form.Item label="Type:">
                   <Select defaultValue="Type" style={{ width: '100%' }} onChange={this.handleChangeState}>
                     <Option value="ui">UI</Option>
                     <Option value="functionality">Functionality</Option>
@@ -117,7 +106,6 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                   </Select>
                 </Form.Item>
               </Col>
-
               <Col span={8}>
                 <Form.Item label="Severity: ">
                   <Select defaultValue="Severity" style={{ width: '100%' }} onChange={this.handleChangeState}>
@@ -127,7 +115,6 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                   </Select>
                 </Form.Item>
               </Col>
-
               <Col span={8}>
                 <Form.Item label="Priority: ">
                   <Select defaultValue="Priority" style={{ width: '100%' }} onChange={this.handleChangeState}>

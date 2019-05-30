@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import { Table, Icon, Comment, Avatar, Input, List, Row, Col, Form, Modal } from 'antd';
+import { Table, Icon, Comment, Avatar, Input, List, Row, Col, Form, Modal,Select } from 'antd';
 import Edit from './Edit';
 import Forms from './Forms';
 import moment from 'moment';
 
-
-
+const Option = Select.Option;
 const { TextArea } = Input;
-
 const CommentList = ({ comments }) => (
   <List
     dataSource={comments}
@@ -68,8 +66,6 @@ const data = [
 
   },
 ];
-
-
 class App extends React.Component {
   state = {
     comments: [],
@@ -77,20 +73,21 @@ class App extends React.Component {
     value: '',
     filteredInfo: null,
     sortedInfo: null,
-    //ModalText: 'Content of the modal',
     visible: false,
     confirmLoading: false,
+    modal1Visible: false,
   };
+  setModal1Visible(modal1Visible) {
+    this.setState({ modal1Visible });
+  }
 
   handleSubmit = () => {
     if (!this.state.value) {
       return;
     }
-
     this.setState({
       submitting: true,
     });
-
     setTimeout(() => {
       this.setState({
         submitting: false,
@@ -107,7 +104,6 @@ class App extends React.Component {
       });
     }, 1000);
   };
-
   handleChangeState = e => {
     this.setState({
       value: e.target.value,
@@ -128,13 +124,11 @@ class App extends React.Component {
       },
     });
   };
-
   showModal = () => {
     this.setState({
       visible: true,
     });
   };
-  
   handleOk = () => {
     this.setState({
       ModalText: 'The modal will be closed after two seconds',
@@ -147,15 +141,12 @@ class App extends React.Component {
       });
     }, 2000);
   };
-
   handleCancel = () => {
     console.log('Clicked cancel button');
     this.setState({
       visible: false,
     });
   };
-
-
   render() {
     const { comments, submitting, value } = this.state;
     let { sortedInfo, filteredInfo } = this.state;
@@ -226,9 +217,7 @@ class App extends React.Component {
         dataIndex: 'edit',
         key: 'edit',
         render: (text, record) => (
-          // <span><Icon type="edit" theme="twoTone"  onClick={this.showModal}/> 
-          // </span>
-         <Edit />
+          <Edit />
         )
       },
       {
@@ -237,25 +226,20 @@ class App extends React.Component {
         key: 'more',
         render: (text, record) => (
           <span>
-            <Icon type="fullscreen" onClick={this.showModal} />
-           
+            <Icon type="fullscreen" className="datatable-icon" onClick={this.showModal} style={{ color: "red" }} />
           </span>
         )
       },
-
-      // {
-      //   title: 'Action',
-      //   dataIndex: 'action',
-      //   key: 'action',
-      //   render: (text, record) => (
-      //     <span>
-      //       <Icon type="fullscreen" onClick={this.showModalView} />
-      //       {/* <View /> */}
-      //     </span>
-      //   )
-      // },
-
-
+      {
+        title: 'Action',
+        dataIndex: 'more',
+        key: 'more',
+        render: (text, record) => (
+          <span>
+            <Icon type="fullscreen" className="datatable-icon" style={{ color: "green" }} onClick={() => this.setModal1Visible(true)} />
+          </span>
+        )
+      },
     ];
     const { visible, confirmLoading } = this.state;
     return (
@@ -274,7 +258,7 @@ class App extends React.Component {
           >
             <p>
               <Form>
-                <Row >
+                <Row type="flex">
                   <Col span={6}>
                     <Form.Item label="Module Name"   >
                     </Form.Item>
@@ -306,7 +290,7 @@ class App extends React.Component {
 
                 <Row >
                   <Col span={8}>
-                    <Form.Item label="Detailed Description"   >
+                    <Form.Item label="Detailed Description">
                     </Form.Item>
                   </Col>
                   <Col span={16}>
@@ -334,7 +318,7 @@ class App extends React.Component {
 
                 <Row>
                   <Col>
-                    <Form.Item label="Added Date"   >
+                    <Form.Item label="Added Date">
                     </Form.Item>
                   </Col>
                   <Col span={16}>
@@ -344,42 +328,64 @@ class App extends React.Component {
                   </Col>
                 </Row>
 
-                <Row>
-                  <Col>
-                    <Form.Item label="Comments"   >
-                      {comments.length > 0 && <CommentList comments={comments} />}
-                      <Comment
-                        avatar={
-                          <Avatar
-                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                            alt="Han Solo"
-                          />
-                        }
-                        content={
-                          <Editor
-                            onChange={this.handleChangeState}
-                            onSubmit={this.handleSubmit}
-                            submitting={submitting}
-                            value={value}
-                          />
-                        }
-                      />
-                    </Form.Item>
-                  </Col>
-                </Row>
 
               </Form>
             </p>
           </Modal>
-
-
+          {/* <Button type="primary" onClick={() => this.setModal1Visible(true)}>
+          Display a modal dialog at 20px to Top
+        </Button> */}
+          <Modal
+            title="More Information"
+            style={{ top: 20 }}
+            visible={this.state.modal1Visible}
+            onOk={() => this.setModal1Visible(false)}
+            onCancel={() => this.setModal1Visible(false)}
+          >
+            <Row>
+              <Col>
+                <Form.Item label="Comments">
+                  {comments.length > 0 && <CommentList comments={comments} />}
+                  <Comment
+                    avatar={
+                      <Avatar
+                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                        alt="Han Solo"
+                      />
+                    }
+                    content={
+                      <Editor
+                        onChange={this.handleChangeState}
+                        onSubmit={this.handleSubmit}
+                        submitting={submitting}
+                        value={value}
+                      />
+                    }
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={10}>
+              <Col span={12}>
+                <Form.Item label="Status">
+                  <Select defaultValue="Status" style={{ width: '100%' }} onChange={this.handleChangeState}>
+                    <Option value="new">New</Option>
+                    <Option value="open">Open</Option>
+                    <Option value="fixed">Fixed</Option>
+                    <Option value="closed">Closed</Option>
+                    <Option value="reopened">Reopened</Option>
+                    <Option value="rejected">Rejected</Option>
+                    <Option value="defered">Defered</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
+          </Modal>
 
         </div>
-
       </div>
     );
   }
 }
-
 ReactDOM.render(<App />, document.getElementById('container'));
 export default Table;         

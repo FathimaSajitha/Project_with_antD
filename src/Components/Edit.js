@@ -6,6 +6,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
   class extends React.Component {
     state = {
       value: undefined,
+      disabled: true,
     };
 
     onChange = value => {
@@ -13,9 +14,9 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
       this.setState({ value });
     };
 
-    state = {
-      disabled: true,
-    };
+    // state = {
+    //   disabled: true,
+    // };
 
     toggle = () => {
       this.setState({
