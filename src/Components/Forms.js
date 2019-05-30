@@ -1,13 +1,13 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import {Button, Modal,Form,Input,Upload,Icon,message,TreeSelect,Select,Row,Col} from 'antd';
+import { Button, Modal, Form, Input, Upload, Icon, message, TreeSelect, Select, Row, Col } from 'antd';
 const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
   class extends React.Component {
     state = {
       value: undefined,
       disabled: true,
     };
-   onChange = value => {
+    onChange = value => {
       console.log(value);
       this.setState({ value });
     };
@@ -40,16 +40,17 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
           }
         },
       };
-  return (
+      return (
         <Modal
           visible={visible}
           title="ADD DEFECT"
           okText="Create"
           style={{ top: 20 }}
+          // style={{Fontfamily: "Times New Roman"}}
           width="700px"
           onCancel={onCancel}
           onOk={onCreate}>
-          
+
           <Form layout="vertical">
             <Row gutter="10">
               <Col span={2}>
@@ -133,7 +134,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                 </Form.Item>
               </Col>
             </Row>
-            
+
             <Row>
               <Col span={24}>
                 <Form.Item label="Steps To Re Create">

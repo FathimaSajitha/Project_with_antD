@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import { Table, Icon, Comment, Avatar, Input, List, Row, Col, Form, Modal,Select } from 'antd';
+import { Table, Icon, Comment, Avatar, Input, List, Row, Col, Form, Modal, Select } from 'antd';
 import Edit from './Edit';
 import Forms from './Forms';
 import moment from 'moment';
@@ -26,7 +26,7 @@ const Editor = ({ onChange, onSubmit, submitting, value }) => (
 const data = [
   {
     key: '1',
-    defectid: 'di001',
+    defectid: 'DI001',
     modulename: 'Module',
     severity: 'High',
     priority: 'High',
@@ -37,7 +37,7 @@ const data = [
   },
   {
     key: '2',
-    defectid: 'di002',
+    defectid: 'DI002',
     modulename: 'Module1',
     severity: 'Medium',
     priority: 'Medium',
@@ -47,7 +47,7 @@ const data = [
   },
   {
     key: '3',
-    defectid: 'di003',
+    defectid: 'DI003',
     modulename: 'Module2',
     severity: 'Low',
     priority: 'Low',
@@ -57,7 +57,6 @@ const data = [
   },
   {
     key: '4',
-    defectid: 'di004',
     modulename: 'Module3',
     severity: 'High',
     priority: 'High',
@@ -152,6 +151,7 @@ class App extends React.Component {
       {
         title: 'Defectid',
         dataIndex: 'defectid',
+        render: text => <a href="javascript:;">{text}</a>,
         key: 'defectid',
         filteredValue: filteredInfo.defectid || null,
         onFilter: (value, record) => record.defectid.includes(value),
@@ -247,16 +247,18 @@ class App extends React.Component {
             title="DEFECT DETAILS"
             visible={visible}
             style={{ top: 20 }}
+            Font-Family="Segoe UI"
             width="600px"
             onOk={this.handleOk}
             confirmLoading={confirmLoading}
             onCancel={this.handleCancel}
           >
             <p>
-              <Form>
+              <Form layout="horizontal">
                 <Row type="flex">
                   <Col span={6}>
-                    <Form.Item label="Module Name"   >
+                    <Form.Item label="Module Name">
+                    
                     </Form.Item>
                   </Col>
                   <Col span={2}>
@@ -328,7 +330,7 @@ class App extends React.Component {
               </Form>
             </p>
           </Modal>
-        
+
           <Modal
             title="More Information"
             style={{ top: 20 }}
@@ -337,44 +339,44 @@ class App extends React.Component {
             onCancel={() => this.setModal1Visible(false)}
           >
             <Form>
-            <Row>
-              <Col>
-                <Form.Item label="Comments">
-                  {comments.length > 0 && <CommentList comments={comments} />}
-                  <Comment
-                    avatar={
-                      <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        alt="Han Solo"
-                      />
-                    }
-                    content={
-                      <Editor
-                        onChange={this.handleChangeState}
-                        onSubmit={this.handleSubmit}
-                        submitting={submitting}
-                        value={value}
-                      />
-                    }
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12}>
-                <Form.Item label="Status">
-                  <Select defaultValue="status" style={{ width: '100%' }} onChange={this.handleChangeState}>
-                    <Option value="new">New</Option>
-                    <Option value="open">Open</Option>
-                    <Option value="fixed">Fixed</Option>
-                    <Option value="closed">Closed</Option>
-                    <Option value="reopened">Reopened</Option>
-                    <Option value="rejected">Rejected</Option>
-                    <Option value="defered">Defered</Option>
-                  </Select>
-                </Form.Item>
-              </Col>
-            </Row>
+              <Row>
+                <Col>
+                  <Form.Item label="Comments">
+                    {comments.length > 0 && <CommentList comments={comments} />}
+                    <Comment
+                      avatar={
+                        <Avatar
+                          src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                          alt="Han Solo"
+                        />
+                      }
+                      content={
+                        <Editor
+                          onChange={this.handleChangeState}
+                          onSubmit={this.handleSubmit}
+                          submitting={submitting}
+                          value={value}
+                        />
+                      }
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row>
+                <Col span={12}>
+                  <Form.Item label="Status">
+                    <Select defaultValue="status" style={{ width: '100%' }} onChange={this.handleChangeState}>
+                      <Option value="new">New</Option>
+                      <Option value="open">Open</Option>
+                      <Option value="fixed">Fixed</Option>
+                      <Option value="closed">Closed</Option>
+                      <Option value="reopened">Reopened</Option>
+                      <Option value="rejected">Rejected</Option>
+                      <Option value="defered">Defered</Option>
+                    </Select>
+                  </Form.Item>
+                </Col>
+              </Row>
             </Form>
           </Modal>
 
