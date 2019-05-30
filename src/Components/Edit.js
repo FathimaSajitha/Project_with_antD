@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { Button,Modal,Form,Input,Upload,Icon,message,Row,Col,Select,TreeSelect} from 'antd';
+import { Button,Modal,Form,Input,Upload,Icon,message,Row,Col,Select,Card,TreeSelect} from 'antd';
 
 const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
   class extends React.Component {
@@ -58,6 +58,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
           onCancel={onCancel}
           onOk={onCreate}
         >
+          <Card title="Default size card"style={{ width: 650 }}>
           <Form layout="vertical">
             <Row gutter="10">
               <Col span={2}>
@@ -192,6 +193,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
             </Row>
 
           </Form>
+          </Card>
         </Modal>
       );
     }

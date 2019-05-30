@@ -1,8 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import Table from './Components/Table';
-// import View from './Components/View';
-// import Model from './Components/Model';
 import { Typography } from 'antd';
 
 const { Title } = Typography;
@@ -10,7 +8,7 @@ const { Title } = Typography;
 function App() {
   return (
     <div>
-      <Title level={2}>PROJECT FOR DEFECT TRACKER</Title>
+      <Title level={2} style={{FontFamily:"sans-serif"}}>PROJECT FOR DEFECT TRACKER</Title>
     </div>
   )};   
 

@@ -19,7 +19,7 @@ const CommentList = ({ comments }) => (
 const Editor = ({ onChange, onSubmit, submitting, value }) => (
   <div>
     <Form.Item>
-      <TextArea rows={4} onChange={onChange} value={value} />
+      <TextArea rows={4} onChange={onChange} value={value}   />
     </Form.Item>
   </div>
 );
@@ -32,9 +32,7 @@ const data = [
     priority: 'High',
     type: 'Functionality',
     status: 'Open',
-
-
-  },
+    },
   {
     key: '2',
     defectid: 'DI002',
@@ -241,13 +239,22 @@ class App extends React.Component {
     return (
       <div>
         <Forms />
-        <Table columns={columns} dataSource={data} pagination={{ pageSize: 3 }} onChange={this.handleChange} />
+        <Table columns={columns} 
+        dataSource={data} 
+        pagination={{ pageSize: 3 }}
+         onChange={this.handleChange}
+    columns={columns}
+    dataSource={data}
+    bordered
+    title={() => 'DEFECT TRACKER TABLE'}
+    footer={() => ''}
+   />
         <div>
           <Modal
             title="DEFECT DETAILS"
             visible={visible}
             style={{ top: 20 }}
-            Font-Family="Segoe UI"
+          
             width="600px"
             onOk={this.handleOk}
             confirmLoading={confirmLoading}
@@ -258,7 +265,7 @@ class App extends React.Component {
                 <Row type="flex">
                   <Col span={6}>
                     <Form.Item label="Module Name">
-                    
+
                     </Form.Item>
                   </Col>
                   <Col span={2}>
@@ -277,12 +284,12 @@ class App extends React.Component {
                   </Col>
                   <Col span={2}>
                   </Col>
-                  <Col span={10}>
+                  <Col span={16}>
                     <Form.Item   >
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </Form.Item>
                   </Col>
-                  <Col span={6}>
+                  <Col>
                   </Col>
                 </Row>
 
@@ -303,8 +310,7 @@ class App extends React.Component {
 
                 <Row>
                   <Col span={8}>
-                    <Form.Item>
-                      Defect Added By
+                    <Form.Item label="Defect Added By">
                     </Form.Item>
                   </Col>
                   <Col span={16}>
@@ -315,7 +321,7 @@ class App extends React.Component {
                 </Row>
 
                 <Row>
-                  <Col>
+                  <Col Col span={8}>
                     <Form.Item label="Added Date">
                     </Form.Item>
                   </Col>
